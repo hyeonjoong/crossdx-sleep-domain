@@ -1,0 +1,8 @@
+domain,label,anchor_item,item_label,utility,own_loading,bootstrap_selection_freq
+dep,Depression (PHQ-9),PHQ2,depressed mood,0.683,0.78,0.337
+anx,Anxiety (GAD-7),GAD2,uncontrollable worry,0.763,0.8,0.89
+ptsd,PTSD (PCL-5),PCL11,negative emotions,0.695,0.71,0.367
+panic,Panic (PDSS),PDSS2,panic distress,0.688,0.8,0.407
+suicide,Suicidality (DSI-SS),DSI2,suicidal ideation/plan,0.723,0.86,0.41
+alcohol,Alcohol use (AUDIT),AUDIT3,binge frequency,0.703,0.8,0.827
+sleep,Insomnia (ISI)  [NEW 7th domain],ISI5,daytime interference,0.755,0.72,0.47

@@ -1,0 +1,8 @@
+item,content,bootstrap_freq,is_ISI3m
+ISI2,maintenance,0.647,True
+ISI7,worry/concerns,0.347,True
+ISI1,onset,0.007,False
+ISI3,early-morning,0.0,False
+ISI4,dissatisfaction,0.0,False
+ISI5,daytime interference,0.0,True
+ISI6,noticeable,0.0,False

@@ -1,0 +1,4 @@
+domain,instrument,n_items,total_mean,total_sd,cutoff,prevalence,n_positive
+sleep,ISI,7,2.78,3.44,15,0.0115,280
+dep,PHQ,9,3.27,3.71,10,0.0542,1316
+anx,GAD,7,1.91,2.92,10,0.0225,546

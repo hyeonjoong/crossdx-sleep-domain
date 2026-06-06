@@ -1,0 +1,8 @@
+domain,label,random_panel_auroc,random_panel_sd,optimized_panel_auroc,full_instrument_auroc_TRIVIAL
+dep,Depression (PHQ-9),0.94,0.022,0.953,1.0
+anx,Anxiety (GAD-7),0.931,0.022,0.958,1.0
+ptsd,PTSD (PCL-5),0.942,0.021,0.934,1.0
+panic,Panic (PDSS),0.926,0.048,0.97,1.0
+suicide,Suicidality (DSI-SS),0.947,0.019,0.964,1.0
+alcohol,Alcohol use (AUDIT),0.844,0.029,0.873,1.0
+sleep,Insomnia (ISI),0.869,0.031,0.868,1.0

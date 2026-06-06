@@ -1,0 +1,7 @@
+domain,label,auroc_6anchors,auroc_6anchors_plus_sleep,delta_auroc_from_sleep,auprc_6anchors,auprc_6anchors_plus_sleep,delta_auprc_from_sleep
+dep,Depression (PHQ-9),0.973,0.969,-0.004,0.855,0.846,-0.008
+anx,Anxiety (GAD-7),0.956,0.957,0.001,0.754,0.75,-0.004
+ptsd,PTSD (PCL-5),0.933,0.936,0.003,0.63,0.633,0.003
+panic,Panic (PDSS),0.969,0.97,0.001,0.564,0.597,0.033
+suicide,Suicidality (DSI-SS),0.971,0.966,-0.004,0.777,0.753,-0.024
+alcohol,Alcohol use (AUDIT),0.862,0.864,0.002,0.66,0.656,-0.004

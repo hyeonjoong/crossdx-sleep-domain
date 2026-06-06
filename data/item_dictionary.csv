@@ -1,0 +1,65 @@
+item,domain,label,n_categories,own_loading,cross_loadings
+PHQ1,dep,anhedonia,4,0.74,
+PHQ2,dep,depressed mood,4,0.78,
+PHQ3,dep,sleep problems,4,0.55,sleep:0.45
+PHQ4,dep,fatigue,4,0.68,sleep:0.3;anx:0.15
+PHQ5,dep,appetite change,4,0.7,
+PHQ6,dep,worthlessness/guilt,4,0.72,suicide:0.2
+PHQ7,dep,concentration,4,0.66,anx:0.2
+PHQ8,dep,psychomotor,4,0.6,
+PHQ9,dep,suicidal thoughts,4,0.62,suicide:0.55
+GAD1,anx,nervous/on edge,4,0.78,
+GAD2,anx,uncontrollable worry,4,0.8,dep:0.2
+GAD3,anx,worry too much,4,0.79,
+GAD4,anx,trouble relaxing,4,0.74,panic:0.2
+GAD5,anx,restlessness,4,0.7,panic:0.25
+GAD6,anx,irritable,4,0.66,
+GAD7,anx,afraid something awful,4,0.7,panic:0.3;ptsd:0.2
+PCL1,ptsd,intrusive memories,5,0.72,anx:0.15
+PCL2,ptsd,nightmares,5,0.7,sleep:0.3
+PCL3,ptsd,flashbacks,5,0.74,
+PCL4,ptsd,emotional distress at cue,5,0.73,panic:0.2
+PCL5,ptsd,physiological reactivity,5,0.7,panic:0.25
+PCL6,ptsd,avoid memories,5,0.68,
+PCL7,ptsd,avoid reminders,5,0.67,
+PCL8,ptsd,amnesia,5,0.58,
+PCL9,ptsd,negative beliefs,5,0.7,dep:0.2
+PCL10,ptsd,blame,5,0.66,dep:0.2
+PCL11,ptsd,negative emotions,5,0.71,dep:0.25
+PCL12,ptsd,loss of interest,5,0.69,dep:0.3
+PCL13,ptsd,detachment,5,0.67,dep:0.2
+PCL14,ptsd,emotional numbing,5,0.66,dep:0.2
+PCL15,ptsd,irritability/anger,5,0.64,alcohol:0.15
+PCL16,ptsd,recklessness,5,0.6,alcohol:0.2
+PCL17,ptsd,hypervigilance,5,0.68,anx:0.2
+PCL18,ptsd,startle,5,0.66,panic:0.2
+PCL19,ptsd,concentration,5,0.65,dep:0.2
+PCL20,ptsd,sleep disturbance,5,0.64,sleep:0.4
+PDSS1,panic,panic frequency,5,0.78,
+PDSS2,panic,panic distress,5,0.8,anx:0.2
+PDSS3,panic,anticipatory anxiety,5,0.76,anx:0.3
+PDSS4,panic,agoraphobic avoidance,5,0.72,
+PDSS5,panic,interoceptive avoidance,5,0.7,
+PDSS6,panic,work impairment,5,0.66,dep:0.2
+PDSS7,panic,social impairment,5,0.66,dep:0.2
+DSI1,suicide,frequency of ideation,4,0.85,dep:0.2
+DSI2,suicide,suicidal ideation/plan,4,0.86,
+DSI3,suicide,control over ideation,4,0.8,
+DSI4,suicide,impulses to act,4,0.78,
+AUDIT1,alcohol,frequency,5,0.72,
+AUDIT2,alcohol,typical quantity,5,0.74,
+AUDIT3,alcohol,binge frequency,5,0.8,
+AUDIT4,alcohol,impaired control,5,0.76,
+AUDIT5,alcohol,failed expectations,5,0.72,
+AUDIT6,alcohol,morning drinking,5,0.7,
+AUDIT7,alcohol,guilt after drinking,5,0.68,dep:0.2
+AUDIT8,alcohol,blackouts,5,0.66,
+AUDIT9,alcohol,injuries,5,0.62,
+AUDIT10,alcohol,others concerned,5,0.64,
+ISI1,sleep,onset difficulty,5,0.55,
+ISI2,sleep,maintenance,5,0.78,
+ISI3,sleep,early-morning awakening,5,0.55,
+ISI4,sleep,sleep dissatisfaction,5,0.68,dep:0.15
+ISI5,sleep,daytime interference,5,0.72,dep:0.3
+ISI6,sleep,noticeable to others,5,0.58,
+ISI7,sleep,worry/concerns re sleep,5,0.7,anx:0.35

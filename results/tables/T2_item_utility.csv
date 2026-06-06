@@ -1,0 +1,65 @@
+domain,item,label,own_loading,utility,selected
+alcohol,AUDIT3,binge frequency,0.8,0.703,1
+alcohol,AUDIT5,failed expectations,0.72,0.676,0
+alcohol,AUDIT4,impaired control,0.76,0.672,0
+alcohol,AUDIT1,frequency,0.72,0.652,0
+alcohol,AUDIT6,morning drinking,0.7,0.628,0
+alcohol,AUDIT2,typical quantity,0.74,0.627,0
+alcohol,AUDIT7,guilt after drinking,0.68,0.623,0
+alcohol,AUDIT8,blackouts,0.66,0.606,0
+alcohol,AUDIT9,injuries,0.62,0.582,0
+alcohol,AUDIT10,others concerned,0.64,0.569,0
+anx,GAD2,uncontrollable worry,0.8,0.763,1
+anx,GAD4,trouble relaxing,0.74,0.714,0
+anx,GAD3,worry too much,0.79,0.706,0
+anx,GAD7,afraid something awful,0.7,0.702,0
+anx,GAD1,nervous/on edge,0.78,0.689,0
+anx,GAD5,restlessness,0.7,0.662,0
+anx,GAD6,irritable,0.66,0.631,0
+dep,PHQ4,fatigue,0.68,0.707,0
+dep,PHQ6,worthlessness/guilt,0.72,0.691,0
+dep,PHQ9,suicidal thoughts,0.62,0.69,0
+dep,PHQ2,depressed mood,0.78,0.683,1
+dep,PHQ7,concentration,0.66,0.648,0
+dep,PHQ3,sleep problems,0.55,0.646,0
+dep,PHQ1,anhedonia,0.74,0.643,0
+dep,PHQ5,appetite change,0.7,0.627,0
+dep,PHQ8,psychomotor,0.6,0.573,0
+panic,PDSS3,anticipatory anxiety,0.76,0.693,0
+panic,PDSS2,panic distress,0.8,0.688,1
+panic,PDSS4,agoraphobic avoidance,0.72,0.635,0
+panic,PDSS7,social impairment,0.66,0.614,0
+panic,PDSS1,panic frequency,0.78,0.582,0
+panic,PDSS6,work impairment,0.66,0.562,0
+panic,PDSS5,interoceptive avoidance,0.7,0.554,0
+ptsd,PCL11,negative emotions,0.71,0.695,1
+ptsd,PCL12,loss of interest,0.69,0.679,0
+ptsd,PCL5,physiological reactivity,0.7,0.666,0
+ptsd,PCL9,negative beliefs,0.7,0.66,0
+ptsd,PCL4,emotional distress at cue,0.73,0.651,0
+ptsd,PCL14,emotional numbing,0.66,0.646,0
+ptsd,PCL17,hypervigilance,0.68,0.643,0
+ptsd,PCL20,sleep disturbance,0.64,0.637,0
+ptsd,PCL19,concentration,0.65,0.636,0
+ptsd,PCL3,flashbacks,0.74,0.635,0
+ptsd,PCL2,nightmares,0.7,0.634,0
+ptsd,PCL7,avoid reminders,0.67,0.629,0
+ptsd,PCL10,blame,0.66,0.623,0
+ptsd,PCL1,intrusive memories,0.72,0.621,0
+ptsd,PCL13,detachment,0.67,0.61,0
+ptsd,PCL6,avoid memories,0.68,0.588,0
+ptsd,PCL15,irritability/anger,0.64,0.574,0
+ptsd,PCL18,startle,0.66,0.56,0
+ptsd,PCL16,recklessness,0.6,0.537,0
+ptsd,PCL8,amnesia,0.58,0.528,0
+sleep,ISI5,daytime interference,0.72,0.755,1
+sleep,ISI2,maintenance,0.78,0.713,0
+sleep,ISI4,sleep dissatisfaction,0.68,0.69,0
+sleep,ISI7,worry/concerns re sleep,0.7,0.686,0
+sleep,ISI3,early-morning awakening,0.55,0.615,0
+sleep,ISI6,noticeable to others,0.58,0.573,0
+sleep,ISI1,onset difficulty,0.55,0.57,0
+suicide,DSI1,frequency of ideation,0.85,0.724,0
+suicide,DSI2,suicidal ideation/plan,0.86,0.723,1
+suicide,DSI3,control over ideation,0.8,0.709,0
+suicide,DSI4,impulses to act,0.78,0.689,0

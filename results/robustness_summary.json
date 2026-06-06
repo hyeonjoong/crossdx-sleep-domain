@@ -1,0 +1,10 @@
+{
+  "ablation_frac_in_ISI3m": 0.889,
+  "ablation_n": 36,
+  "ablation_anchor_counts": {
+    "ISI2": 26,
+    "ISI5": 5,
+    "ISI4": 4,
+    "ISI7": 1
+  }
+}

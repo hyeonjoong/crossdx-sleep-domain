@@ -1,0 +1,65 @@
+domain,item,label,selection_freq,selected_in_main
+alcohol,AUDIT3,binge frequency,0.827,1
+alcohol,AUDIT5,failed expectations,0.08,0
+alcohol,AUDIT1,frequency,0.057,0
+alcohol,AUDIT4,impaired control,0.033,0
+alcohol,AUDIT6,morning drinking,0.003,0
+alcohol,AUDIT2,typical quantity,0.0,0
+alcohol,AUDIT7,guilt after drinking,0.0,0
+alcohol,AUDIT8,blackouts,0.0,0
+alcohol,AUDIT9,injuries,0.0,0
+alcohol,AUDIT10,others concerned,0.0,0
+anx,GAD2,uncontrollable worry,0.89,1
+anx,GAD3,worry too much,0.07,0
+anx,GAD4,trouble relaxing,0.027,0
+anx,GAD1,nervous/on edge,0.01,0
+anx,GAD7,afraid something awful,0.003,0
+anx,GAD5,restlessness,0.0,0
+anx,GAD6,irritable,0.0,0
+dep,PHQ2,depressed mood,0.337,1
+dep,PHQ6,worthlessness/guilt,0.323,0
+dep,PHQ4,fatigue,0.243,0
+dep,PHQ5,appetite change,0.037,0
+dep,PHQ1,anhedonia,0.03,0
+dep,PHQ9,suicidal thoughts,0.02,0
+dep,PHQ7,concentration,0.007,0
+dep,PHQ3,sleep problems,0.003,0
+dep,PHQ8,psychomotor,0.0,0
+panic,PDSS2,panic distress,0.407,1
+panic,PDSS3,anticipatory anxiety,0.377,0
+panic,PDSS4,agoraphobic avoidance,0.197,0
+panic,PDSS7,social impairment,0.02,0
+panic,PDSS1,panic frequency,0.0,0
+panic,PDSS5,interoceptive avoidance,0.0,0
+panic,PDSS6,work impairment,0.0,0
+ptsd,PCL11,negative emotions,0.367,1
+ptsd,PCL7,avoid reminders,0.163,0
+ptsd,PCL5,physiological reactivity,0.107,0
+ptsd,PCL12,loss of interest,0.093,0
+ptsd,PCL9,negative beliefs,0.077,0
+ptsd,PCL3,flashbacks,0.07,0
+ptsd,PCL14,emotional numbing,0.043,0
+ptsd,PCL19,concentration,0.027,0
+ptsd,PCL17,hypervigilance,0.017,0
+ptsd,PCL4,emotional distress at cue,0.013,0
+ptsd,PCL2,nightmares,0.01,0
+ptsd,PCL20,sleep disturbance,0.007,0
+ptsd,PCL1,intrusive memories,0.003,0
+ptsd,PCL6,avoid memories,0.003,0
+ptsd,PCL8,amnesia,0.0,0
+ptsd,PCL10,blame,0.0,0
+ptsd,PCL13,detachment,0.0,0
+ptsd,PCL15,irritability/anger,0.0,0
+ptsd,PCL16,recklessness,0.0,0
+ptsd,PCL18,startle,0.0,0
+sleep,ISI5,daytime interference,0.47,1
+sleep,ISI2,maintenance,0.44,0
+sleep,ISI4,sleep dissatisfaction,0.09,0
+sleep,ISI1,onset difficulty,0.0,0
+sleep,ISI3,early-morning awakening,0.0,0
+sleep,ISI6,noticeable to others,0.0,0
+sleep,ISI7,worry/concerns re sleep,0.0,0
+suicide,DSI2,suicidal ideation/plan,0.41,1
+suicide,DSI3,control over ideation,0.38,0
+suicide,DSI1,frequency of ideation,0.13,0
+suicide,DSI4,impulses to act,0.08,0

@@ -1,0 +1,7 @@
+lambda,dep,anx,ptsd,panic,suicide,alcohol,sleep
+0.0,PHQ4 (fatigue),GAD2 (uncontrollable worry),PCL11 (negative emotions),PDSS3 (anticipatory anxiety),DSI1 (frequency of ideation),AUDIT3 (binge frequency),ISI5 (daytime interference)
+0.05,PHQ4 (fatigue),GAD2 (uncontrollable worry),PCL11 (negative emotions),PDSS3 (anticipatory anxiety),DSI2 (suicidal ideation/plan),AUDIT3 (binge frequency),ISI5 (daytime interference)
+0.1,PHQ2 (depressed mood),GAD2 (uncontrollable worry),PCL11 (negative emotions),PDSS2 (panic distress),DSI2 (suicidal ideation/plan),AUDIT3 (binge frequency),ISI5 (daytime interference)
+0.15,PHQ6 (worthlessness/guilt),GAD2 (uncontrollable worry),PCL7 (avoid reminders),PDSS4 (agoraphobic avoidance),DSI2 (suicidal ideation/plan),AUDIT3 (binge frequency),ISI2 (maintenance)
+0.25,PHQ5 (appetite change),GAD2 (uncontrollable worry),PCL7 (avoid reminders),PDSS4 (agoraphobic avoidance),DSI2 (suicidal ideation/plan),AUDIT3 (binge frequency),ISI2 (maintenance)
+0.5,PHQ8 (psychomotor),GAD6 (irritable),PCL3 (flashbacks),PDSS4 (agoraphobic avoidance),DSI3 (control over ideation),AUDIT3 (binge frequency),ISI3 (early-morning awakening)

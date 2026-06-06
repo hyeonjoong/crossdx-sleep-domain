@@ -1,0 +1,28 @@
+cff-version: 1.2.0
+message: "If you use this software, data, or method, please cite it as below."
+title: "Adding a sleep domain to a cross-diagnostic questionnaire item-selection framework: simulation, open real-data validation, and a pre-registered protocol"
+abstract: "Reproducible pipeline extending a cross-diagnostic item-selection framework to a seventh (sleep/Insomnia Severity Index) domain, with a literature-calibrated simulation, robustness/ablation analysis, multi-cohort open real-data validation, and a pre-registered confirmatory protocol."
+type: software
+version: "1.0.0"
+date-released: "2026-06-06"
+license: MIT
+authors:
+  - family-names: Kim
+    given-names: Hyeon-Joong
+    affiliation: "NeuroTech Research Institute, Bell Therapeutics"
+    orcid: ""  # TODO: add ORCID
+  - family-names: Lee
+    given-names: Geon-Seok
+    affiliation: "NeuroTech Research Institute, Bell Therapeutics"
+  - family-names: Park
+    given-names: Jong-Hwa
+    affiliation: "NeuroTech Research Institute, Bell Therapeutics"
+keywords:
+  - insomnia
+  - Insomnia Severity Index
+  - transdiagnostic
+  - item selection
+  - machine learning
+  - cross-diagnostic screening
+  - HiTOP
+  - digital therapeutics

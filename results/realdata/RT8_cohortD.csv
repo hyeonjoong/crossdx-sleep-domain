@@ -1,0 +1,8 @@
+item,content,item_total_r,boot_freq,is_ISI3m
+ISI4,dissatisfaction,0.512,0.433,False
+ISI2,maintenance,0.606,0.187,True
+ISI7,worry/concerns,0.544,0.177,True
+ISI6,noticeable,0.502,0.117,False
+ISI1,onset,0.539,0.077,False
+ISI5,daytime interference,0.232,0.007,True
+ISI3,early-morning,0.368,0.003,False
