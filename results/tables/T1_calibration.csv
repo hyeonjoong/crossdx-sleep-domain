@@ -1,0 +1,8 @@
+domain,label,cutoff,target_prev,achieved_prev,delta,total_mean,total_sd,n_positive
+dep,Depression (PHQ-9),10,0.12,0.1205,0.904,4.12,4.2,241
+anx,Anxiety (GAD-7),10,0.1,0.1005,0.747,3.91,3.87,201
+ptsd,PTSD (PCL-5),33,0.06,0.0605,1.0,11.67,10.99,121
+panic,Panic (PDSS),8,0.04,0.04,1.753,1.45,2.39,80
+suicide,Suicidality (DSI-SS),4,0.07,0.07,1.48,0.83,1.49,140
+alcohol,Alcohol use (AUDIT),8,0.15,0.15,1.416,3.4,4.04,300
+sleep,Insomnia (ISI)  [NEW 7th domain],15,0.12,0.1205,0.273,8.27,4.95,241

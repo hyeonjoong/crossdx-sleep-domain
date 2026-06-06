@@ -1,0 +1,4 @@
+domain,instrument_label,selected_item,content,utility,bootstrap_freq,is_ISI3m
+sleep,Insomnia (ISI),ISI2,maintenance,0.748,0.647,True
+dep,Depression (PHQ-9),PHQ4,,0.722,1.0,
+anx,Anxiety (GAD-7),GAD2,,0.785,0.897,

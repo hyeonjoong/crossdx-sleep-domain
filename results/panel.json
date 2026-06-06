@@ -1,0 +1,32 @@
+{
+  "n_subjects": 2000,
+  "n_dev": 1700,
+  "n_lockbox": 300,
+  "lambda": 0.1,
+  "objective_7domain": 4.513118040526654,
+  "objective_6domain": 3.939066593005294,
+  "panel_7domain": {
+    "dep": "PHQ2",
+    "anx": "GAD2",
+    "ptsd": "PCL11",
+    "panic": "PDSS2",
+    "suicide": "DSI2",
+    "alcohol": "AUDIT3",
+    "sleep": "ISI5"
+  },
+  "panel_6domain": {
+    "dep": "PHQ4",
+    "anx": "GAD2",
+    "ptsd": "PCL11",
+    "panic": "PDSS2",
+    "suicide": "DSI2",
+    "alcohol": "AUDIT3"
+  },
+  "sleep_anchor": "ISI5",
+  "sleep_subthreshold": {
+    "anchor_auroc": 0.882,
+    "panel_auroc": 0.897,
+    "anchor_auprc": 0.857,
+    "panel_auprc": 0.908
+  }
+}

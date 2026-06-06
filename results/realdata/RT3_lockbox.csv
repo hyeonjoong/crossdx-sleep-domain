@@ -1,0 +1,4 @@
+domain,label,anchor_item,anchor_auroc,panel_auroc,panel_auroc_ci,panel_auprc,crossdx_gain
+sleep,Insomnia (ISI),ISI2,0.938,0.972,"[0.944, 0.993]",0.538,0.034
+dep,Depression (PHQ-9),PHQ4,0.893,0.959,"[0.948, 0.968]",0.673,0.066
+anx,Anxiety (GAD-7),GAD2,0.952,0.974,"[0.949, 0.991]",0.706,0.022

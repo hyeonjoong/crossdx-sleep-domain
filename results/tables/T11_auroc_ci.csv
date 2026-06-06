@@ -1,0 +1,8 @@
+domain,label,panel_auroc,panel_ci,anchor_auroc,anchor_ci
+dep,Depression (PHQ-9),0.953,"[0.907, 0.985]",0.877,"[0.817, 0.926]"
+anx,Anxiety (GAD-7),0.958,"[0.924, 0.985]",0.929,"[0.893, 0.959]"
+ptsd,PTSD (PCL-5),0.934,"[0.844, 0.988]",0.894,"[0.765, 0.977]"
+panic,Panic (PDSS),0.97,"[0.939, 0.993]",0.972,"[0.945, 0.993]"
+suicide,Suicidality (DSI-SS),0.964,"[0.939, 0.982]",0.945,"[0.900, 0.976]"
+alcohol,Alcohol use (AUDIT),0.873,"[0.813, 0.922]",0.824,"[0.761, 0.889]"
+sleep,Insomnia (ISI),0.868,"[0.813, 0.922]",0.855,"[0.801, 0.904]"

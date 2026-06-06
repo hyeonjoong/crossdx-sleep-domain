@@ -1,0 +1,8 @@
+domain,anchor,item_label,node_strength,betweenness
+anx,GAD2,uncontrollable worry,0.887,0.133
+ptsd,PCL11,negative emotions,0.76,0.0
+dep,PHQ2,depressed mood,0.744,0.267
+sleep,ISI5,daytime interference,0.73,0.0
+panic,PDSS2,panic distress,0.529,0.0
+suicide,DSI2,suicidal ideation/plan,0.439,0.333
+alcohol,AUDIT3,binge frequency,0.127,0.0

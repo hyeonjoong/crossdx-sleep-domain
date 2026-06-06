@@ -1,0 +1,4 @@
+cohort,N,country,sleep_instrument,sleep_item_selected,is_core_ISI3m,anx_item,extra_domain
+A. Chinese students (Zenodo),24292,China,ISI,ISI2 maintenance,YES (99.4% boot),GAD2 worry,—
+B. SRI US adolescents (clinical insomnia),95,USA (clinical insomnia),ISI,ISI3 early-morning,NO (55% boot),STAI19,stress (PSS)
+C. UK Akram students (+suicidality),1406,UK,SCI (not ISI),SCi3,n/a (SCI),GAD7_3,"suicidality (SBQ-R), stress (PSS)"

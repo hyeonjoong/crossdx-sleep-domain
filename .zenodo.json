@@ -1,0 +1,14 @@
+{
+  "title": "Adding a sleep domain to a cross-diagnostic questionnaire item-selection framework: simulation, open real-data validation, and a pre-registered protocol",
+  "description": "Reproducible analysis pipeline that extends a cross-diagnostic questionnaire item-selection framework to a seventh (sleep / Insomnia Severity Index) domain. Includes a literature-calibrated simulation (7 domains), a robustness/ablation analysis, multi-cohort open real-data validation (item-level ISI + PHQ-9 + GAD-7 and related instruments), and a pre-registered confirmatory protocol. Contains analysis code, a simulated cohort, and aggregate results only; no participant-level human data.",
+  "upload_type": "software",
+  "license": "MIT",
+  "creators": [
+    {"name": "Kim, Hyeon-Joong", "affiliation": "NeuroTech Research Institute, Bell Therapeutics"},
+    {"name": "Lee, Geon-Seok", "affiliation": "NeuroTech Research Institute, Bell Therapeutics"},
+    {"name": "Park, Jong-Hwa", "affiliation": "NeuroTech Research Institute, Bell Therapeutics"}
+  ],
+  "keywords": ["insomnia", "Insomnia Severity Index", "transdiagnostic", "item selection",
+    "machine learning", "cross-diagnostic screening", "HiTOP", "digital therapeutics"],
+  "access_right": "open"
+}

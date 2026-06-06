@@ -1,0 +1,9 @@
+# downloaded third-party open data (not redistributed; auto-downloaded by 06/07)
+data/realdata/**/*.csv
+data/realdata/**/*.xlsx
+data/realdata/*.csv
+# python / os
+__pycache__/
+*.pyc
+~$*
+.DS_Store
