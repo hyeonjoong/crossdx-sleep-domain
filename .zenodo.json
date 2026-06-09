@@ -6,6 +6,8 @@
   "creators": [
     {"name": "Kim, Hyeon-Joong", "affiliation": "NeuroTech Research Institute, Bell Therapeutics", "orcid": "0000-0002-2898-0464"},
     {"name": "Lee, Geon-Seok", "affiliation": "NeuroTech Research Institute, Bell Therapeutics"},
+    {"name": "Lim, Yun-Sub", "affiliation": "Brain Science Institute, Korea Institute of Science and Technology (KIST)"},
+    {"name": "Im, Chang-Hwan", "affiliation": "Department of Biomedical Engineering, Hanyang University"},
     {"name": "Park, Jong-Hwa", "affiliation": "NeuroTech Research Institute, Bell Therapeutics"}
   ],
   "keywords": ["insomnia", "Insomnia Severity Index", "transdiagnostic", "item selection",
