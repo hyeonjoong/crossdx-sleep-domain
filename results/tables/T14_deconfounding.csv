@@ -1,0 +1,5 @@
+pair,phq_item,label,cosine_redundancy
+ISI5 (sleep anchor) — PHQ3,PHQ3,PHQ-9 sleep item,0.529
+ISI5 (sleep anchor) — PHQ4,PHQ4,PHQ-9 fatigue item,0.554
+ISI5 (sleep anchor) — PHQ2,PHQ2,PHQ-9 depressed-mood item,0.384
+ISI5 (sleep anchor) — PHQ1,PHQ1,PHQ-9 anhedonia item,0.371
