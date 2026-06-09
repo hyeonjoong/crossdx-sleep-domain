@@ -93,7 +93,20 @@ def main():
     md = open(os.path.join(MAN, "manuscript.md"), encoding="utf-8").read().splitlines()
     doc = Document()
     doc.styles["Normal"].font.name = "Calibri"
-    doc.styles["Normal"].font.size = Pt(10.5)
+    doc.styles["Normal"].font.size = Pt(11)
+    # --- PLOS ONE formatting: double line spacing, continuous line numbers, page numbers ---
+    from docx.enum.text import WD_LINE_SPACING
+    doc.styles["Normal"].paragraph_format.line_spacing_rule = WD_LINE_SPACING.DOUBLE
+    _sectPr = doc.sections[0]._sectPr
+    _ln = OxmlElement("w:lnNumType")
+    _ln.set(qn("w:countBy"), "1"); _ln.set(qn("w:restart"), "continuous"); _ln.set(qn("w:distance"), "360")
+    _sectPr.append(_ln)
+    _fp = doc.sections[0].footer.paragraphs[0]; _fp.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    _run = _fp.add_run()
+    _b = OxmlElement("w:fldChar"); _b.set(qn("w:fldCharType"), "begin")
+    _instr = OxmlElement("w:instrText"); _instr.set(qn("xml:space"), "preserve"); _instr.text = "PAGE"
+    _e = OxmlElement("w:fldChar"); _e.set(qn("w:fldCharType"), "end")
+    _run._r.append(_b); _run._r.append(_instr); _run._r.append(_e)
 
     i = 0
     while i < len(md):
@@ -148,21 +161,7 @@ def main():
             i += 1; continue
         p = doc.add_paragraph(); add_inline(p, s); i += 1
 
-    # ---- Figures appendix ----
-    doc.add_page_break()
-    h = doc.add_heading("Figures", level=1)
-    for r in h.runs: r.font.color.rgb = TEAL
-    for fname in sorted(FIG_CAPTIONS):
-        fpath = os.path.join(FIG, fname)
-        if os.path.exists(fpath):
-            doc.add_picture(fpath, width=Inches(6.3))
-            doc.paragraphs[-1].alignment = WD_ALIGN_PARAGRAPH.CENTER
-            cap = doc.add_paragraph(); add_inline(cap, FIG_CAPTIONS[fname])
-            for run in cap.runs: run.font.size = Pt(9); run.italic = True
-            cap.alignment = WD_ALIGN_PARAGRAPH.CENTER
-            doc.add_paragraph("")
-
-    # ---- Tables appendix ----
+    # ---- Tables (placed in the manuscript file per PLOS; figures are separate TIFFs) ----
     doc.add_page_break()
     h = doc.add_heading("Tables", level=1)
     for r in h.runs: r.font.color.rgb = TEAL
@@ -179,17 +178,8 @@ def main():
     rf = os.path.join(RDR, "RF1_realdata.png")
     if os.path.exists(rf):
         doc.add_page_break()
-        h = doc.add_heading("Real-data validation (open dataset, N = 24,292)", level=1)
+        h = doc.add_heading("Real-data tables (Cohort A, N = 24,292)", level=1)
         for r in h.runs: r.font.color.rgb = TEAL
-        doc.add_picture(rf, width=Inches(6.3))
-        doc.paragraphs[-1].alignment = WD_ALIGN_PARAGRAPH.CENTER
-        cap = doc.add_paragraph()
-        add_inline(cap, "Fig 9. Real-data validation (Zenodo 10423537; item-level ISI, PHQ-9, GAD-7). "
-                        "(A) Bootstrap selection frequency of each ISI item as the sleep anchor (orange = ISI-3m items); "
-                        "(B) three-domain lockbox AUROC, anchor vs panel; (C) total-score correlations, real vs literature.")
-        for run in cap.runs: run.font.size = Pt(9); run.italic = True
-        cap.alignment = WD_ALIGN_PARAGRAPH.CENTER
-        doc.add_paragraph("")
         rd_tables = {
             "RT2_selected_panel.csv": "Table R1. Real-data selected three-domain panel with utility and bootstrap selection frequency.",
             "RT2b_isi_selection_freq.csv": "Table R2. Real-data ISI-item selection frequency as the sleep anchor (300 bootstraps).",
@@ -208,19 +198,8 @@ def main():
     rf2 = os.path.join(RDR, "RF2_multicohort.png")
     if os.path.exists(rf2):
         doc.add_page_break()
-        h = doc.add_heading("Multi-cohort real-data validation (three open datasets)", level=1)
+        h = doc.add_heading("Multi-cohort tables (Cohorts B–D)", level=1)
         for r in h.runs: r.font.color.rgb = TEAL
-        doc.add_picture(rf2, width=Inches(6.3))
-        doc.paragraphs[-1].alignment = WD_ALIGN_PARAGRAPH.CENTER
-        cap = doc.add_paragraph()
-        add_inline(cap, "Fig 10. Multi-cohort validation. (A) Cohort B (SRI; US adolescents, clinical "
-                        "insomnia, N=95): bootstrap selection frequency of each ISI item as the sleep anchor "
-                        "(orange = ISI-3m) — unstable at this sample size. (B) Cohort C (Akram et al.; UK, "
-                        "N=1,408): five-domain lockbox AUROC including the new suicidality domain (orange; "
-                        "insomnia measured by the SCI).")
-        for run in cap.runs: run.font.size = Pt(9); run.italic = True
-        cap.alignment = WD_ALIGN_PARAGRAPH.CENTER
-        doc.add_paragraph("")
         mc_tables = {
             "RT5_multicohort_summary.csv": "Table R5. Cross-cohort summary: selected sleep/anxiety items and H1 verdict across three independent open cohorts.",
             "RT6_cohortB_sri.csv": "Table R6. Cohort B (clinical, N=95): ISI-item selection frequency (200 bootstraps).",
@@ -234,6 +213,24 @@ def main():
                 for run in c.runs: run.bold = True; run.font.size = Pt(9.5)
                 render_csv_table(doc, p)
                 doc.add_paragraph("")
+
+    # ---- Figure captions (figures uploaded SEPARATELY as TIFF per PLOS; not embedded) ----
+    doc.add_page_break()
+    h = doc.add_heading("Figure captions", level=1)
+    for r in h.runs: r.font.color.rgb = TEAL
+    _n = doc.add_paragraph()
+    add_inline(_n, "Figures are provided as separate files (Fig1.tif–Fig10.tif), per PLOS ONE requirements; captions are listed here in read order.")
+    for run in _n.runs: run.italic = True; run.font.size = Pt(9)
+    _figcaps = [FIG_CAPTIONS[k] for k in sorted(FIG_CAPTIONS)]
+    _figcaps.append("Fig 9. Real-data validation (Cohort A; Zenodo 10423537; item-level ISI, PHQ-9, GAD-7). "
+                    "(A) Bootstrap selection frequency of each ISI item as the sleep anchor (orange = ISI-3m items); "
+                    "(B) three-domain lockbox AUROC, anchor vs panel; (C) total-score correlations, real vs literature.")
+    _figcaps.append("Fig 10. Multi-cohort validation. (A) Cohort B (SRI; US adolescents, clinical insomnia, N=95): "
+                    "bootstrap selection frequency of each ISI item as the sleep anchor (orange = ISI-3m) — unstable "
+                    "at this sample size. (B) Cohort C (Akram et al.; UK, N=1,408): five-domain lockbox AUROC including "
+                    "the new suicidality domain (orange; insomnia measured by the SCI).")
+    for _cap in _figcaps:
+        _p = doc.add_paragraph(); add_inline(_p, _cap)
 
     out = os.path.join(MAN, "manuscript.docx")
     doc.save(out)
