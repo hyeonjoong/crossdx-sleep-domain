@@ -10,7 +10,7 @@ authors:
   - family-names: Kim
     given-names: Hyeon-Joong
     affiliation: "NeuroTech Research Institute, Bell Therapeutics"
-    orcid: ""  # TODO: add ORCID
+    orcid: "https://orcid.org/0000-0002-2898-0464"
   - family-names: Lee
     given-names: Geon-Seok
     affiliation: "NeuroTech Research Institute, Bell Therapeutics"

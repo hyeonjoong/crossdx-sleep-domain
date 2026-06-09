@@ -4,7 +4,7 @@
   "upload_type": "software",
   "license": "MIT",
   "creators": [
-    {"name": "Kim, Hyeon-Joong", "affiliation": "NeuroTech Research Institute, Bell Therapeutics"},
+    {"name": "Kim, Hyeon-Joong", "affiliation": "NeuroTech Research Institute, Bell Therapeutics", "orcid": "0000-0002-2898-0464"},
     {"name": "Lee, Geon-Seok", "affiliation": "NeuroTech Research Institute, Bell Therapeutics"},
     {"name": "Park, Jong-Hwa", "affiliation": "NeuroTech Research Institute, Bell Therapeutics"}
   ],
