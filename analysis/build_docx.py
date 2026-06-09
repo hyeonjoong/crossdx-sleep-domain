@@ -39,6 +39,7 @@ TABLE_CAPTIONS = {
     "T9_bridge_centrality.csv": "Table 7. Network bridge centrality (node strength, betweenness).",
     "T12_baselines.csv": "Table 8. Baselines: random one-item panel vs optimized panel (full battery is trivially 1.0).",
     "T13_ablation.csv": "Table 9. Calibration ablation (36 conditions): selected sleep anchor and whether it is an ISI-3m item.",
+    "T14_deconfounding.csv": "Table 10. Redundancy (cosine) of the selected ISI sleep anchor with PHQ-9 sleep, fatigue, mood and anhedonia items — the mechanism of the depression de-confounding.",
 }
 
 INLINE = re.compile(r"(\*\*.+?\*\*|`.+?`|\*.+?\*)")

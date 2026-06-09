@@ -18,6 +18,7 @@ STEPS = [
     "06_realdata.py",
     "07_multicohort.py",
     "08_cohortD.py",
+    "09_deconfounding.py",
 ]
 
 
