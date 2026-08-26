@@ -19,6 +19,10 @@ STEPS = [
     "07_multicohort.py",
     "08_cohortD.py",
     "09_deconfounding.py",
+    # Redraws the 10 submission figures at journal column width (174 mm) from the
+    # result tables written by the steps above. Pure redraw: nothing is recomputed,
+    # and every plotted value is asserted against its source table before drawing.
+    "10_figures_brm.py",
 ]
 
 
