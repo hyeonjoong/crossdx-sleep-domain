@@ -53,7 +53,9 @@ from scipy import ndimage
 # ---------------------------------------------------------------------------
 WIDTH_MM = 174.0                      # Springer / BRM double column
 WIDTH_IN = WIDTH_MM / 25.4            # 6.8504 in
-TIFF_DPI = 400
+TIFF_DPI = 600                        # Springer "combination art" floor (colour
+                                      # diagrams with extensive lettering); also
+                                      # clears the 300 dpi halftone floor
 PNG_DPI = 300
 CAP_FLOOR_MM = 2.0
 
@@ -553,8 +555,11 @@ def figure3(root, outdir, metrics):
                    edgecolor=(ORANGE_E if hl else "white"),
                    linewidth=(2.0 if hl else 1.6),
                    hatch=(HATCH_HL if hl else None), zorder=3)
+        # DEFECT FIX: at FS_ANNOT (8.5 pt) the node labels measured 1.95 mm cap
+        # height at 174 mm, under the 2.0 mm print floor and under Springer's
+        # 2-3 mm lettering rule. 9.0 pt clears it without enlarging the nodes.
         ax.text(P[i, 0], P[i, 1], "%s\n%s" % (DOMSHORT[d], pan[d]),
-                ha="center", va="center", fontsize=FS_ANNOT, fontweight="bold",
+                ha="center", va="center", fontsize=9.0, fontweight="bold",
                 color="white", zorder=4, linespacing=1.15)
 
     # DEFECT FIX: the original clipped three node circles (DEP flat-topped,
