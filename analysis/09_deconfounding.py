@@ -12,6 +12,7 @@ Output: results/tables/T14_deconfounding.csv
 """
 import os, json
 import pandas as pd
+import config as C
 import pipeline_core as P
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -22,8 +23,8 @@ PHQ = {"PHQ3": "PHQ-9 sleep item", "PHQ4": "PHQ-9 fatigue item",
        "PHQ2": "PHQ-9 depressed-mood item", "PHQ1": "PHQ-9 anhedonia item"}
 
 
-def main():
-    items, meta = P.load_cohort()
+def main(data_dir=None):
+    items, meta = P.load_cohort(data_dir)
     dev, _ = P.make_split(len(items))
     pj = json.load(open(os.path.join(ROOT, "results", "panel.json")))
     sleep = pj["panel_7domain"]["sleep"]
@@ -33,12 +34,18 @@ def main():
              "cosine_redundancy": round(float(cos.loc[sleep, c]), 3)} for c in PHQ]
     df = pd.DataFrame(rows)
     df.to_csv(os.path.join(TBL, "T14_deconfounding.csv"), index=False)
-    print("[09] depression anchor: 6-domain =", dep6, "-> 7-domain =", dep7,
-          "(i.e., fatigue -> depressed mood when the sleep domain is added)")
+    if dep6 != dep7:
+        label = {it[0]: it[1] for it in C.ITEMS["dep"]}
+        print("[09] depression anchor: 6-domain =", dep6, "-> 7-domain =", dep7,
+              "(i.e., %s -> %s when the sleep domain is added)"
+              % (label.get(dep6, dep6), label.get(dep7, dep7)))
+    else:
+        print("[09] depression anchor: 6-domain =", dep6, "-> 7-domain =", dep7,
+              "(unchanged when the sleep domain is added)")
     print(f"[09] redundancy of the sleep anchor ({sleep}) with PHQ-9 items:")
     print(df.to_string(index=False))
     print("[09] saved T14_deconfounding.csv")
 
 
 if __name__ == "__main__":
-    main()
+    P.step_main(main, __doc__)

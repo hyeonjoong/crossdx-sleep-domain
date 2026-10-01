@@ -30,8 +30,16 @@ from itertools import product
 from sklearn.metrics import roc_auc_score, average_precision_score
 from sklearn.linear_model import LogisticRegression
 from sklearn.preprocessing import StandardScaler
+from _download import MANIFEST, DownloadError, fetch_verified
 
-plt.rcParams.update({"font.size": 11, "savefig.dpi": 300})
+# The same rcParams as 04_figures.py. run_all.py runs 04 first in the same
+# process, so the committed figures were drawn with these settings; setting them
+# here gives the same image when this step is run on its own.
+plt.rcParams.update({
+    "font.size": 11, "axes.titlesize": 12, "axes.labelsize": 11,
+    "xtick.labelsize": 10, "ytick.labelsize": 10, "legend.fontsize": 10,
+    "figure.dpi": 150, "savefig.dpi": 300, "axes.grid": False,
+})
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 RD = os.path.join(ROOT, "data", "realdata")
@@ -49,17 +57,16 @@ LABELFULL = {"sleep": "Insomnia (ISI)", "dep": "Depression (PHQ-9)", "anx": "Anx
 
 
 ZENODO = "https://zenodo.org/records/10423537/files/{}.csv?download=1"
+N_EXPECTED = 24292   # complete ISI + PHQ-9 + GAD-7 records analysed in the paper
 
 
 def ensure_downloaded():
-    """Auto-download the open CC-BY dataset (Zenodo 10423537) if absent."""
-    import urllib.request
+    """Download the open CC-BY dataset (Zenodo 10423537) unless the files on disk
+    already match the SHA-256 in _download.MANIFEST (needs internet, about 9 MB)."""
     os.makedirs(RD, exist_ok=True)
     for f in ["isi", "phq9", "gad7", "pss", "demographic"]:
         path = os.path.join(RD, f"{f}.csv")
-        if not os.path.exists(path):
-            print(f"[06] downloading {f}.csv from Zenodo 10423537 (CC-BY 4.0) ...")
-            urllib.request.urlretrieve(ZENODO.format(f), path)
+        fetch_verified(ZENODO.format(f), path, MANIFEST[f"{f}.csv"], tag="[06]")
 
 
 def load():
@@ -149,7 +156,13 @@ def optimize(df, idx, ylab, lam, cosfun):
 
 
 def main():
-    df = load()
+    try:
+        df = load()
+    except DownloadError as e:
+        raise SystemExit("[06] %s" % e)
+    if len(df) != N_EXPECTED:
+        raise SystemExit("[06] merged real cohort has N=%d, expected %d; the files in %s "
+                         "are not the ones behind the published results" % (len(df), N_EXPECTED, RD))
     print(f"[06] merged real cohort: N={len(df)} (ISI+PHQ-9+GAD-7, item-level)")
     desc, corr, itc = describe(df)
     print(desc.to_string(index=False))

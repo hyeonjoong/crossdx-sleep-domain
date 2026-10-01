@@ -1,9 +1,13 @@
 # Python 3.11+ (tested on 3.14)
+# Minimum versions. For the exact versions used to verify the committed results
+# see requirements-lock.txt (and README, section Reproduce).
 numpy>=1.26
 pandas>=2.0
 scikit-learn>=1.3
 scipy>=1.11
 networkx>=3.0
 matplotlib>=3.7
+pillow>=9          # 10_figures_brm.py (TIFF export); installed with matplotlib anyway
+openpyxl>=3.1      # 07_multicohort.py reads the Cohort C .xlsx file
 # optional, only for building the .docx manuscript:
 python-docx>=1.1

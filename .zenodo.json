@@ -12,5 +12,11 @@
   ],
   "keywords": ["insomnia", "Insomnia Severity Index", "transdiagnostic", "item selection",
     "machine learning", "cross-diagnostic screening", "HiTOP", "digital therapeutics"],
-  "access_right": "open"
+  "access_right": "open",
+  "related_identifiers": [
+    {"identifier": "10.1038/s41597-024-03888-8", "relation": "references", "scheme": "doi", "resource_type": "publication-article"},
+    {"identifier": "10.5281/zenodo.10423537", "relation": "references", "scheme": "doi", "resource_type": "dataset"},
+    {"identifier": "10.6084/m9.figshare.20235492", "relation": "references", "scheme": "doi", "resource_type": "dataset"},
+    {"identifier": "10.6084/m9.figshare.24052236", "relation": "references", "scheme": "doi", "resource_type": "dataset"}
+  ]
 }

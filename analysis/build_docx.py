@@ -2,8 +2,11 @@
 """
 build_docx.py — render manuscript/manuscript.md into a formatted Word document
 with embedded figures and tables.  Output: manuscript/manuscript.docx
+
+Needs the manuscript sources (manuscript/manuscript.md), which are not part of
+the public repository; without them the script stops with a message.
 """
-import os, re, glob
+import os, re, glob, sys
 import pandas as pd
 from docx import Document
 from docx.shared import Pt, Inches, RGBColor
@@ -90,7 +93,12 @@ def is_table_row(line):
 
 
 def main():
-    md = open(os.path.join(MAN, "manuscript.md"), encoding="utf-8").read().splitlines()
+    src = os.path.join(MAN, "manuscript.md")
+    if not os.path.exists(src):
+        sys.exit("[build_docx] %s not found. The manuscript sources (manuscript/) are not "
+                 "part of this repository, so this builder only runs in the authors' "
+                 "working copy." % src)
+    md = open(src, encoding="utf-8").read().splitlines()
     doc = Document()
     doc.styles["Normal"].font.name = "Calibri"
     doc.styles["Normal"].font.size = Pt(11)
