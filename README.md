@@ -128,7 +128,8 @@ rewrote (RT8 without the internal Cohort D data) are listed as "not rerun" and a
 not counted as identical. `--steps 02,03,04,09` checks a subset; `--keep-temp`
 keeps the copy for inspection.
 
-Platform note. The committed data/simulated_cohort_*.csv is the canonical input.
+Platform note. The committed data/simulated_cohort_*.csv is the canonical input, and the
+numbers reported in the manuscript are the committed results; they are not regenerated.
 Step 01 draws the cohort with numpy's multivariate_normal, whose SVD factor has a
 sign convention that depends on the BLAS/LAPACK build, and the step 05 ablation
 (T13_ablation.csv, F8_robustness.png, robustness_summary.json) simulates new
