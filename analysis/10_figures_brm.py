@@ -5,8 +5,10 @@ width (174 mm) with type sized for that width.
 
 This is a PURE REDRAW from the saved result tables. Nothing is recomputed: no
 GraphicalLassoCV, no ablation grid, no real-data loader. Every plotted number is
-read from results/tables/*.csv, results/realdata/*.csv or results/panel.json, and
-is asserted against the source before it is drawn.
+read from results/tables/*.csv, results/realdata/*.csv or results/panel.json.
+Key values are checked (chk) against the source tables or the numbers quoted in
+the manuscript; every check is recorded in figure_metrics.json, and the script
+exits with status 1 after drawing all figures if any check failed.
 
 Figure map (manuscript label -> source table(s)):
   Figure1   T4_lockbox_performance
@@ -23,11 +25,16 @@ Figure map (manuscript label -> source table(s)):
 House rules enforced by assertion:
   * every string drawn into every figure is pure ASCII (no em dash, en dash or
     Unicode minus anywhere), and axes.unicode_minus is disabled;
-  * width is exactly 174 mm;
-  * measured modal cap height >= 2.0 mm at 174 mm.
+  * width is exactly 174 mm.
+Measured modal cap height >= 2.0 mm at 174 mm is reported per figure (PASS/FAIL);
+with --strict a figure below the floor makes the script exit with status 1. The
+measurement draws all text black, so white labels on dark fills are counted.
+
+Usage: python analysis/10_figures_brm.py [--root DIR] [--outdir DIR] [--strict]
+  --root defaults to the folder above analysis/.
 
 Outputs (into --outdir, default ./out):
-  Figure1.tif .. Figure6.tif, FigureS1.tif .. FigureS4.tif   LZW RGB, 400 dpi
+  Figure1.tif .. Figure6.tif, FigureS1.tif .. FigureS4.tif   LZW RGB, 600 dpi
   Figure1.png .. FigureS4.png                                300 dpi
   Figure*_grey.png                                           desaturated proof
   figure_metrics.json                                        measurements + checks
@@ -245,12 +252,22 @@ def measure_cap_mm(fig, dpi=TIFF_DPI):
     """
     import io
     hidden = _hide_nontext(fig)
+    # Glyphs are found as dark pixels on white, so draw every text in black for
+    # this render only (white labels on dark node or heatmap fills would
+    # otherwise be invisible to the measurement). Colours are restored below.
+    recolored = []
+    for t in fig.findobj(mtext.Text):
+        if t.get_visible() and t.get_text():
+            recolored.append((t, t.get_color()))
+            t.set_color("black")
     buf = io.BytesIO()
     try:
         fig.savefig(buf, format="png", dpi=dpi, facecolor="white")
     finally:
         for a in hidden:
             a.set_visible(True)
+        for t, c in recolored:
+            t.set_color(c)
     buf.seek(0)
     img = Image.open(buf).convert("L")
     arr = np.asarray(img)
@@ -332,12 +349,14 @@ CHECKS = []
 
 
 def chk(fig, what, plotted, source, manuscript=None, tol=5e-4):
+    """Record one value check. A mismatch is printed and recorded, and main()
+    exits with status 1 after all figures are drawn."""
     ok = abs(float(plotted) - float(source)) <= tol
     CHECKS.append(dict(figure=fig, quantity=what, plotted=float(plotted),
                        source_csv=float(source), manuscript=manuscript, ok=bool(ok)))
     if not ok:
-        raise AssertionError("VALUE MISMATCH %s / %s: plotted %r vs source %r"
-                             % (fig, what, plotted, source))
+        print("      VALUE MISMATCH %s / %s: plotted %r vs expected %r"
+              % (fig, what, plotted, source))
 
 
 # ===========================================================================
@@ -1073,8 +1092,8 @@ def figureS4(root, outdir, metrics):
     n_tot = int(len(ab))
     n_3m = int(ab.in_ISI3m.sum())
     pct = 100.0 * n_3m / n_tot
-    assert n_tot == 36, n_tot
-    assert round(pct) == 89, pct
+    # the ISI-3m percentage is checked with the other values below
+    chk("FigureS4", "ablation configurations", n_tot, 36, "36")
 
     face, edge, hat = bar_kw_list([is3m[o] for o in order])
     bars = a2.bar(np.arange(len(order)), vals, 0.62, color=face, edgecolor=edge,
@@ -1112,11 +1131,15 @@ def figureS4(root, outdir, metrics):
 # ===========================================================================
 
 
-def main():
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--root", required=True, help="project root")
+def main(argv=None):
+    ap = argparse.ArgumentParser(description="Redraw the 10 BRM submission figures.")
+    ap.add_argument("--root", default=os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+                    help="project root (default: the folder above analysis/)")
     ap.add_argument("--outdir", default="out")
-    args = ap.parse_args()
+    ap.add_argument("--strict", action="store_true",
+                    help="exit with status 1 if any figure is below the %.1f mm cap-height "
+                         "floor" % CAP_FLOOR_MM)
+    args = ap.parse_args(argv)
     os.makedirs(args.outdir, exist_ok=True)
 
     metrics = []
@@ -1144,6 +1167,8 @@ def main():
         print("BELOW FLOOR: %s" % ", ".join(fails))
     if bad:
         print("VALUE MISMATCHES: %r" % bad)
+        sys.exit(1)
+    if fails and args.strict:
         sys.exit(1)
 
 

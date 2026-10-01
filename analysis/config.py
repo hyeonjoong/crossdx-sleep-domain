@@ -16,7 +16,8 @@ Domain order (7 domains = the 6 of Lim et al. 2026 + Sleep as the 7th):
 SEED = 20260605
 N_SUBJECTS = 2000          # Lim et al. used N=1,600 EMBRAIN panel; we use 2,000 for estimate stability
 LOCKBOX_FRAC = 0.15        # strict held-out lockbox (Lim et al. used 15%)
-N_FOLDS = 5                # 5-fold CV for item-utility estimation
+N_FOLDS = 5                # not used by the pipeline (kept so existing imports work):
+                           # item utility is a rank statistic on the development split
 N_BOOTSTRAP = 300          # bootstrap resamples for selection-stability (Lim et al. used 300)
 REDUNDANCY_LAMBDA = 0.10   # lambda on the cosine-redundancy penalty (tuned; see T7 sensitivity)
 

@@ -37,8 +37,8 @@ DOM_SHORT = {"dep": "DEP", "anx": "ANX", "ptsd": "PTSD", "panic": "PANIC",
              "suicide": "SUI", "alcohol": "ALC", "sleep": "SLEEP"}
 
 
-def main():
-    items, meta = P.load_cohort()
+def main(data_dir=None):
+    items, meta = P.load_cohort(data_dir)
     dev, lb = P.make_split(len(items))
     panel = json.load(open(os.path.join(RES, "panel.json")))["panel_7domain"]
     codes = [panel[d] for d in C.DOMAINS]
@@ -140,11 +140,11 @@ def main():
     sleep_col = list(C.DOMAINS).index("sleep")
     sleep_contrib = {C.DOMAINS[r]: round(float(contrib[r, sleep_col]), 3)
                      for r in range(len(C.DOMAINS))}
-    print("\n[03] SLEEP anchor (ISI5) standardized contribution to each domain:")
+    print("\n[03] SLEEP anchor (%s) standardized contribution to each domain:" % panel["sleep"])
     for k, v in sleep_contrib.items():
         print(f"     -> {k:8s}: {v:+.3f}")
     print("[03] saved T8-T10 and figures F4, F5")
 
 
 if __name__ == "__main__":
-    main()
+    P.step_main(main, __doc__)

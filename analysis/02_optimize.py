@@ -30,8 +30,8 @@ OWN_LOAD = {it[0]: it[2] for d in C.DOMAINS for it in C.ITEMS[d]}
 SIX = ["dep", "anx", "ptsd", "panic", "suicide", "alcohol"]
 
 
-def main():
-    items, meta = P.load_cohort()
+def main(data_dir=None):
+    items, meta = P.load_cohort(data_dir)
     n = len(items)
     dev, lb = P.make_split(n)
     print(f"[02] N={n}  development={len(dev)}  lockbox={len(lb)}")
@@ -163,4 +163,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    P.step_main(main, __doc__)

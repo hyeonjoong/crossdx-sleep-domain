@@ -25,6 +25,15 @@ import config as C
 import pipeline_core as P
 import sim_core
 
+# The same rcParams as 04_figures.py. run_all.py runs 04 first in the same
+# process, so the committed figures were drawn with these settings; setting them
+# here gives the same image when this step is run on its own.
+plt.rcParams.update({
+    "font.size": 11, "axes.titlesize": 12, "axes.labelsize": 11,
+    "xtick.labelsize": 10, "ytick.labelsize": 10, "legend.fontsize": 10,
+    "figure.dpi": 150, "savefig.dpi": 300, "axes.grid": False,
+})
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 TBL = os.path.join(ROOT, "results", "tables")
@@ -53,8 +62,8 @@ def bootstrap_ci(y, p, n=1000, seed=1):
     return float(np.percentile(aucs, 2.5)), float(np.percentile(aucs, 97.5))
 
 
-def main():
-    items, meta = P.load_cohort()
+def main(data_dir=None):
+    items, meta = P.load_cohort(data_dir)
     dev, lb = P.make_split(len(items))
     panel = json.load(open(os.path.join(RES, "panel.json")))["panel_7domain"]
     codes = [panel[d] for d in C.DOMAINS]
@@ -186,4 +195,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    P.step_main(main, __doc__)

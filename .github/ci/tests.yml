@@ -1,0 +1,31 @@
+name: tests
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  pytest:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+      - name: Install
+        # the lock file plus test-only extras (PyYAML for the CITATION.cff test,
+        # python-docx for the doc-builder tests)
+        run: python -m pip install -r analysis/requirements-lock.txt pytest pyyaml python-docx
+      - name: Test
+        # no network steps: 06 and 07 (downloads) are not run in CI
+        env:
+          PYTHONDONTWRITEBYTECODE: "1"
+          MPLBACKEND: Agg
+        run: python -m pytest -q

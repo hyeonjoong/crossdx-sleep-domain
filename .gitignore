@@ -2,8 +2,17 @@
 data/realdata/**/*.csv
 data/realdata/**/*.xlsx
 data/realdata/*.csv
+# unfinished downloads (removed automatically on failure)
+data/realdata/*.part
+data/realdata/**/*.part
+# your own (real) cohort for --data-dir: never commit item-level participant data
+data/private/
+# generated output (run_all.py, 10_figures_brm.py, build_submission_docs.py)
+out/
+SUBMISSION/
 # python / os
 __pycache__/
 *.pyc
+.pytest_cache/
 ~$*
 .DS_Store

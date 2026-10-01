@@ -21,7 +21,7 @@ Outputs (results/realdata/):
   RT6_cohortB_sri.csv / RT7_cohortC_uk.csv   per-cohort detail
   RF2_multicohort.png           cross-cohort sleep-item selection figure
 """
-import os, re, urllib.request
+import os, re
 import numpy as np
 import pandas as pd
 import matplotlib
@@ -31,8 +31,16 @@ from itertools import product
 from sklearn.metrics import roc_auc_score, average_precision_score
 from sklearn.linear_model import LogisticRegression
 from sklearn.preprocessing import StandardScaler
+from _download import MANIFEST, DownloadError, fetch_verified
 
-plt.rcParams.update({"font.size": 11, "savefig.dpi": 300})
+# The same rcParams as 04_figures.py. run_all.py runs 04 first in the same
+# process, so the committed figures were drawn with these settings; setting them
+# here gives the same image when this step is run on its own.
+plt.rcParams.update({
+    "font.size": 11, "axes.titlesize": 12, "axes.labelsize": 11,
+    "xtick.labelsize": 10, "ytick.labelsize": 10, "legend.fontsize": 10,
+    "figure.dpi": 150, "savefig.dpi": 300, "axes.grid": False,
+})
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 RD = os.path.join(ROOT, "data", "realdata")
@@ -45,11 +53,53 @@ ISI_CONTENT = {1: "onset", 2: "maintenance", 3: "early-morning", 4: "dissatisfac
 ISI3M = {2, 5, 7}
 
 
+N_EXPECTED = {"B": 95, "C": 1406}   # complete records analysed in the paper
+
+
 def dl(url, path):
-    if not os.path.exists(path):
-        os.makedirs(os.path.dirname(path), exist_ok=True)
-        print(f"[07] downloading {os.path.basename(path)} ...")
-        urllib.request.urlretrieve(url, path)
+    """Download unless the file on disk matches the SHA-256 in _download.MANIFEST."""
+    rel = os.path.relpath(path, RD).replace(os.sep, "/")
+    try:
+        fetch_verified(url, path, MANIFEST[rel], tag="[07]")
+    except DownloadError as e:
+        raise SystemExit("[07] %s" % e)
+
+
+def check_n(cohort, n):
+    if n != N_EXPECTED[cohort]:
+        raise SystemExit("[07] Cohort %s has N=%d complete records, expected %d; the "
+                         "downloaded file is not the one behind the published results"
+                         % (cohort, n, N_EXPECTED[cohort]))
+
+
+# Cohort A (step 06) enters RT5 as fixed values. They are compared with the
+# tables 06 writes, so a stale row is reported instead of passing silently.
+COHORT_A_ROW = {"cohort": "A. Chinese students (Zenodo)", "N": 24292, "country": "China",
+                "sleep_instrument": "ISI", "sleep_item_selected": "ISI2 maintenance",
+                "is_core_ISI3m": "YES (99.4% boot)", "anx_item": "GAD2 worry",
+                "extra_domain": "\u2014"}
+
+
+def cohort_a_row_problems(out_dir=OUT):
+    """Differences between COHORT_A_ROW and RT2/RT2b written by 06_realdata.py."""
+    try:
+        rt2 = pd.read_csv(os.path.join(out_dir, "RT2_selected_panel.csv")).set_index("domain")
+        rt2b = pd.read_csv(os.path.join(out_dir, "RT2b_isi_selection_freq.csv"))
+    except (OSError, KeyError, pd.errors.ParserError) as e:
+        return ["RT2/RT2b from 06_realdata.py not readable (%s)" % e]
+    problems = []
+    sleep = "%s %s" % (rt2.loc["sleep", "selected_item"], rt2.loc["sleep", "content"])
+    if sleep != COHORT_A_ROW["sleep_item_selected"]:
+        problems.append("sleep item is %s in RT2" % sleep)
+    is3m = str(rt2.loc["sleep", "is_ISI3m"]).strip().lower() == "true"
+    boot = 100 * rt2b.loc[rt2b.is_ISI3m.astype(str).str.lower() == "true", "bootstrap_freq"].sum()
+    verdict = "%s (%.1f%% boot)" % ("YES" if is3m else "NO", boot)
+    if verdict != COHORT_A_ROW["is_core_ISI3m"]:
+        problems.append("ISI-3m verdict is %s in RT2/RT2b" % verdict)
+    anx = rt2.loc["anx", "selected_item"]
+    if anx != COHORT_A_ROW["anx_item"].split()[0]:
+        problems.append("anxiety item is %s in RT2" % anx)
+    return problems
 
 
 # ---------- generic engine ----------
@@ -145,6 +195,7 @@ def cohort_B():
     ren.update({c: f"STAI{i+1}" for i, c in enumerate(stai)})
     ren.update({c: f"PSS{i+1}" for i, c in enumerate(pss)})
     d = d.rename(columns=ren)
+    check_n("B", len(d))
     pools = {"sleep": [f"ISI{i}" for i in range(1, 8)],
              "dep": [f"BDI{i}" for i in range(1, 22)],
              "anx": [f"STAI{i}" for i in range(1, 21)],
@@ -179,6 +230,7 @@ def cohort_C():
     sci = [f"SCi{i}" for i in range(1, 9)]
     use = phq + gad + pss + sbq + sci
     d = df[use].apply(pd.to_numeric, errors="coerce").dropna().reset_index(drop=True)
+    check_n("C", len(d))
     # SCI: higher = better sleep -> reverse so higher = more insomnia (items 0-4)
     for c in sci:
         d[c] = d[c].max() - d[c]
@@ -216,10 +268,10 @@ def main():
     print(f"     lockbox AUROC: {[(d, C['lockbox'][(d,'panel')]) for d in ['sleep','dep','anx','stress','suicide']]}")
 
     # summary table (incl. Cohort A from 06)
+    for p in cohort_a_row_problems():
+        print("[07] WARNING: RT5 row A (fixed values) disagrees with step 06 output: %s" % p)
     summ = pd.DataFrame([
-        {"cohort": "A. Chinese students (Zenodo)", "N": 24292, "country": "China",
-         "sleep_instrument": "ISI", "sleep_item_selected": "ISI2 maintenance",
-         "is_core_ISI3m": "YES (99.4% boot)", "anx_item": "GAD2 worry", "extra_domain": "—"},
+        dict(COHORT_A_ROW),
         {"cohort": B["name"], "N": B["N"], "country": "USA (clinical insomnia)",
          "sleep_instrument": "ISI", "sleep_item_selected": f"{B['sleep_item']} {B['sleep_content']}",
          "is_core_ISI3m": f"{'YES' if B['is_ISI3m'] else 'NO'} ({B['isi3m_boot']*100:.0f}% boot)",

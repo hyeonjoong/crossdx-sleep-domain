@@ -5,8 +5,11 @@ cover-letter documents for the PLOS ONE submission:
   SUBMISSION/cover_letter.docx   (from manuscript/cover_letter.md)
   SUBMISSION/S1_Protocol.docx    (from protocol/analysis_plan.md)
   SUBMISSION/S1_Checklist.docx   (adapted TRIPOD+AI reporting checklist)
+
+Needs manuscript/cover_letter.md, which is not part of the public repository;
+without it the script stops with a message and creates nothing.
 """
-import os, re
+import os, re, sys
 from docx import Document
 from docx.shared import Pt, RGBColor
 from docx.enum.text import WD_ALIGN_PARAGRAPH
@@ -14,7 +17,6 @@ from docx.enum.text import WD_ALIGN_PARAGRAPH
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 SUB = os.path.join(ROOT, "SUBMISSION")
-os.makedirs(SUB, exist_ok=True)
 TEAL = RGBColor(0x0E, 0x7C, 0x86)
 INLINE = re.compile(r"(\*\*.+?\*\*|`.+?`)")
 
@@ -128,8 +130,14 @@ def build_checklist():
 
 
 def main():
+    cover = os.path.join(ROOT, "manuscript", "cover_letter.md")
+    if not os.path.exists(cover):
+        sys.exit("[build_submission_docs] %s not found. The manuscript sources "
+                 "(manuscript/) are not part of this repository, so this builder only "
+                 "runs in the authors' working copy." % cover)
+    os.makedirs(SUB, exist_ok=True)
     print("[build_submission_docs] generating readable SI + cover letter ...")
-    md_to_docx(os.path.join(ROOT, "manuscript", "cover_letter.md"), os.path.join(SUB, "cover_letter.docx"))
+    md_to_docx(cover, os.path.join(SUB, "cover_letter.docx"))
     md_to_docx(os.path.join(ROOT, "protocol", "analysis_plan.md"), os.path.join(SUB, "S1_Protocol.docx"))
     build_checklist()
 
